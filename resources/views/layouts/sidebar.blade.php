@@ -5,6 +5,16 @@
 
     <ul class="list-unstyled components">
         <p>Hello {{ Auth::user()->name }}</p>
+
+        <li>
+            <a href="{{ route('home') }}">View Vehicles</a>
+        </li>
+
+        <hr>
+
+        <li>
+            <a href="{{ route('register_vehicle') }}">Register Vehicle</a>
+        </li>
     </ul>
 
     <ul class="list-unstyled CTAs">

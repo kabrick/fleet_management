@@ -327,6 +327,16 @@
             background-color:#6d7fcc;
             color:#fff
         }
+
+        select.compulsory, input.compulsory, textarea.compulsory{
+            border-left:3px solid #F08080;
+            border-bottom:3px solid #F08080;
+        }
+
+        label {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
