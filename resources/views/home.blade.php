@@ -18,8 +18,6 @@
                         <th>Allocation</th>
                         <th>Station</th>
                         <th></th>
-                        <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +29,11 @@
                             <td>{{ $vehicle->vehicle_type }}</td>
                             <td>{{ $vehicle->allocation }}</td>
                             <td>{{ $vehicle->station }}</td>
-                            <td><a class="btn btn-sm btn-primary" href="vehicle_details/{{ $vehicle->id }}">Details</a></td>
-                            <td><a class="btn btn-sm btn-warning" href="edit_vehicle/{{ $vehicle->id }}">Edit</a></td>
-                            <td><a class="btn btn-sm btn-danger" href="delete_vehicle/{{ $vehicle->id }}">Delete</a></td>
+                            <td>
+                                <a class="btn btn-primary" href="vehicle_details/{{ $vehicle->id }}">Details</a>
+                                <a class="btn btn-warning" href="edit_vehicle/{{ $vehicle->id }}">Edit</a>
+                                <a class="btn btn-danger" href="delete_vehicle/{{ $vehicle->id }}">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                 @else

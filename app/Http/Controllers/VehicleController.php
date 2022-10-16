@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use App\Models\VehicleUsage;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     public function register_vehicle() {
         return view('vehicles.register_vehicle');
@@ -102,7 +107,8 @@ class VehicleController extends Controller {
 
     public function vehicle_details($id) {
         $vehicle =  Vehicle::find($id);
+        $usages = VehicleUsage::where('vehicle_id', $id)->get();
 
-        return view('vehicles.vehicle_details', compact('vehicle'));
+        return view('vehicles.vehicle_details', compact('vehicle', 'usages'));
     }
 }

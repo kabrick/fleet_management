@@ -10,10 +10,14 @@
             <a href="{{ route('home') }}">View Vehicles</a>
         </li>
 
+        <li>
+            <a href="{{ route('register_vehicle') }}">Register Vehicle</a>
+        </li>
+
         <hr>
 
         <li>
-            <a href="{{ route('register_vehicle') }}">Register Vehicle</a>
+            <a href="{{ route('register_vehicle') }}">View Vehicle Usage</a>
         </li>
     </ul>
 

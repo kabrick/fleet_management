@@ -44,5 +44,102 @@
                 </tbody>
             </table>
         </div>
+
+        <hr>
+
+        <h4 class="text-center">Vehicle Usage</h4>
+
+        <div class="table-responsive">
+            <table class="table table-striped color-bordered-table success-bordered-table">
+                <thead>
+                    <tr>
+                        <th>Mileage Start</th>
+                        <th>Mileage End</th>
+                        <th>Days in Workshop</th>
+                        <th>Fuel Cost</th>
+                        <th>Service Cost</th>
+                        <th>Tyre Cost</th>
+                        <th>Repairs</th>
+                        <th>Miscellaneous</th>
+                        <th>Driver</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $total_days_in_workshop = 0;
+                        $total_fuel_cost = 0;
+                        $total_service_cost = 0;
+                        $total_tyre_cost = 0;
+                        $total_repairs = 0;
+                        $total_misc = 0;
+                    @endphp
+                    @foreach($usages as $usage)
+                        @php
+                            $total_days_in_workshop += $usage->days_in_workshop;
+                            $total_fuel_cost += $usage->fuel_cost;
+                            $total_service_cost += $usage->service_cost;
+                            $total_tyre_cost += $usage->tyre_cost;
+                        @endphp
+                        <tr>
+                            <td>{{ $usage->mileage_start }}</td>
+                            <td>{{ $usage->mileage_end }}</td>
+                            <td>{{ $usage->days_in_workshop }}</td>
+                            <td>{{ $usage->fuel_cost }}</td>
+                            <td>{{ $usage->service_cost }}</td>
+                            <td>{{ $usage->tyre_cost }}</td>
+                            <td>
+                                @if(!is_null($usage->repair_names))
+                                    @php
+                                        $repair_names = explode(",", $usage->repair_names);
+                                        $repair_costs = explode(",", $usage->repair_costs);
+                                    @endphp
+
+                                    <ol>
+                                        @for($i = 0; $i < count($repair_names); $i++)
+                                            @php $total_repairs += +$repair_costs[$i]; @endphp
+                                            <li>{{ $repair_names[$i] }} - ({{ $repair_costs[$i] }})</li>
+                                        @endfor
+                                    </ol>
+                                @endif
+                            </td>
+                            <td>
+                                @if(!is_null($usage->misc_names))
+                                    @php
+                                        $misc_names = explode(",", $usage->misc_names);
+                                        $misc_costs = explode(",", $usage->misc_costs);
+                                    @endphp
+
+                                    <ol>
+                                        @for($i = 0; $i < count($misc_names); $i++)
+                                            @php $total_misc += +$misc_costs[$i]; @endphp
+                                            <li>{{ $misc_names[$i] }} - ({{ $misc_costs[$i] }})</li>
+                                        @endfor
+                                    </ol>
+                                @endif
+                            </td>
+                            <td>{{ $usage->driver }}</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+
+                    <tr><td colspan="10"></td></tr>
+
+                    <tr>
+                        <td><b>Totals</b></td>
+                        <td></td>
+                        <td>{{ $total_days_in_workshop }}</td>
+                        <td>{{ $total_fuel_cost }}</td>
+                        <td>{{ $total_service_cost }}</td>
+                        <td>{{ $total_tyre_cost }}</td>
+                        <td>{{ $total_repairs }}</td>
+                        <td>{{ $total_misc }}</td>
+                        <td></td>
+                        <td></td>
+                </tbody>
+            </table>
+        </div>
+
+        <a class="btn btn-primary" href="/register_usage/{{ $vehicle->id }}">Register Usage</a>
     </div>
 @endsection

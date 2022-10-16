@@ -27,3 +27,6 @@ Route::any('/edit_vehicle/{id}', [App\Http\Controllers\VehicleController::class,
 Route::any('/save_vehicle_edits', [App\Http\Controllers\VehicleController::class, 'save_vehicle_edits'])->name('save_vehicle_edits');
 Route::any('/delete_vehicle/{id}', [App\Http\Controllers\VehicleController::class, 'delete_vehicle'])->name('delete_vehicle');
 Route::any('/vehicle_details/{id}', [App\Http\Controllers\VehicleController::class, 'vehicle_details'])->name('vehicle_details');
+
+Route::any('/register_usage/{id}', [App\Http\Controllers\VehicleUsageController::class, 'register_usage'])->name('register_usage');
+Route::any('/save_usage', [App\Http\Controllers\VehicleUsageController::class, 'save_usage'])->name('save_usage');
