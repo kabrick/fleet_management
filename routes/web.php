@@ -30,3 +30,13 @@ Route::any('/vehicle_details/{id}', [App\Http\Controllers\VehicleController::cla
 
 Route::any('/register_usage/{id}', [App\Http\Controllers\VehicleUsageController::class, 'register_usage'])->name('register_usage');
 Route::any('/save_usage', [App\Http\Controllers\VehicleUsageController::class, 'save_usage'])->name('save_usage');
+
+Route::any('/register_service/{id}', [App\Http\Controllers\VehicleUsageController::class, 'register_service'])->name('register_service');
+Route::any('/save_service', [App\Http\Controllers\VehicleUsageController::class, 'save_service'])->name('save_service');
+
+Route::any('/service_classes/index', [App\Http\Controllers\ServiceClassesController::class, 'index'])->name('service_classes.index');
+Route::any('/service_classes/create', [App\Http\Controllers\ServiceClassesController::class, 'create'])->name('service_classes.create');
+Route::any('/service_classes/store', [App\Http\Controllers\ServiceClassesController::class, 'store'])->name('service_classes.store');
+Route::any('/service_classes/edit/{id}', [App\Http\Controllers\ServiceClassesController::class, 'edit'])->name('service_classes.edit');
+Route::any('/service_classes/update', [App\Http\Controllers\ServiceClassesController::class, 'update'])->name('service_classes.update');
+Route::any('/service_classes/delete/{id}', [App\Http\Controllers\ServiceClassesController::class, 'delete'])->name('service_classes.delete');

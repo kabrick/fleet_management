@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ServiceClass;
 use App\Models\Vehicle;
+use App\Models\VehicleService;
 use App\Models\VehicleUsage;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -108,7 +110,9 @@ class VehicleController extends Controller {
     public function vehicle_details($id) {
         $vehicle =  Vehicle::find($id);
         $usages = VehicleUsage::where('vehicle_id', $id)->get();
+        $services = VehicleService::where('vehicle_id', $id)->get();
+        $classes = ServiceClass::pluck('name', 'id')->toArray();
 
-        return view('vehicles.vehicle_details', compact('vehicle', 'usages'));
+        return view('vehicles.vehicle_details', compact('vehicle', 'usages', 'services', 'classes'));
     }
 }

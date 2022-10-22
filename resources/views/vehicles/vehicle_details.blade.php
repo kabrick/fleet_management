@@ -4,7 +4,7 @@
     <div class="white-box">
         <h4 class="text-center">Vehicle Details</h4>
 
-        <hr>
+        <br>
 
         @include('flash::message')
 
@@ -45,9 +45,11 @@
             </table>
         </div>
 
-        <hr>
+        <br><hr><br>
 
         <h4 class="text-center">Vehicle Usage</h4>
+
+        <br>
 
         <div class="table-responsive">
             <table class="table table-striped color-bordered-table success-bordered-table">
@@ -136,10 +138,71 @@
                         <td>{{ $total_misc }}</td>
                         <td></td>
                         <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <a class="btn btn-primary" href="/register_usage/{{ $vehicle->id }}">Register Usage</a>
+
+        <br><hr><br>
+
+        <h4 class="text-center">Vehicle Service</h4>
+
+        <br>
+
+        <div class="table-responsive">
+            <table class="table table-striped color-bordered-table success-bordered-table">
+                <thead>
+                <tr>
+                    <th>Service Class</th>
+                    <th>Items</th>
+                    <th>Costs</th>
+                    <th>Total Cost</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @php $overall_costs = 0; @endphp
+                @foreach($services as $service)
+                    @php $total_costs = 0; @endphp
+                    <tr>
+                        <td>{{ $classes[$service->service_class] }}</td>
+                        <td>
+                            @php $service_names = explode(',', $service->service_names); @endphp
+                            <ul>
+                                @foreach($service_names as $service_name)
+                                    <li>{{ $service_name }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>
+                            @php $service_costs = explode(',', $service->service_costs); @endphp
+                            <ul>
+                                @foreach($service_costs as $service_cost)
+                                    @php $total_costs += $service_cost; $overall_costs += $service_cost; @endphp
+                                    <li>{{ $service_cost }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ $total_costs }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+
+                <tr><td colspan="10"></td></tr>
+
+                <tr>
+                    <td><b>Totals</b></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ $overall_costs }}</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <a class="btn btn-primary" href="/register_service/{{ $vehicle->id }}">Register Service</a>
     </div>
 @endsection

@@ -19,6 +19,16 @@
         <li>
             <a href="{{ route('register_vehicle') }}">View Vehicle Usage</a>
         </li>
+
+        <li>
+            <a href="{{ route('register_vehicle') }}">View Vehicle Services</a>
+        </li>
+
+        <hr>
+
+        <li>
+            <a href="{{ route('service_classes.index') }}">Manage Services Classes</a>
+        </li>
     </ul>
 
     <ul class="list-unstyled CTAs">

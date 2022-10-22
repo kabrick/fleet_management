@@ -92,7 +92,7 @@
                                 <input type='text' name='misc_names[]' class='form-control' placeholder='Name'>
                             </div>
                             <div class='col-md-6'>
-                                <input type='number' name='misc_costs' class='form-control' placeholder='Cost'>
+                                <input type='number' name='misc_costs[]' class='form-control' placeholder='Cost'>
                             </div>
                         </div>
                     </div>

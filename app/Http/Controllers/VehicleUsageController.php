@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ServiceClass;
 use App\Models\Vehicle;
+use App\Models\VehicleService;
 use App\Models\VehicleUsage;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -51,7 +53,36 @@ class VehicleUsageController extends Controller {
             $usage->save();
 
             flash("Vehicle usage has been registered")->success();
-            return redirect('home');
+            return redirect('/vehicle_details/' . $request->vehicle_id);
+        }  catch (QueryException $e) {
+            flash("An error occurred. Please try again!")->error();
+            return back()->withInput();
+        }
+    }
+
+    public function register_service($vehicle_id) {
+        $vehicle =  Vehicle::find($vehicle_id);
+        $classes = ServiceClass::pluck('name', 'id')->toArray();
+        $classes = ['' => '--select--'] + $classes;
+
+        return view('vehicle_usage.register_service', compact('vehicle', 'classes'));
+    }
+
+    public function save_service(Request $request) {
+        $service = new VehicleService();
+
+        $service->vehicle_id = $request->vehicle_id;
+        $service->service_class = $request->service_class;
+        $service->service_names = $request->service_names ? implode(',', $request->service_names) : '';
+        $service->service_costs = $request->service_costs ? implode(',', $request->service_costs) : '';
+        $service->updated_by = Auth::id();
+        $service->created_by = Auth::id();
+
+        try {
+            $service->save();
+
+            flash("Vehicle service has been registered")->success();
+            return redirect('/vehicle_details/' . $request->vehicle_id);
         }  catch (QueryException $e) {
             flash("An error occurred. Please try again!")->error();
             return back()->withInput();
