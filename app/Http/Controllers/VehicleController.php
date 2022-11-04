@@ -6,6 +6,7 @@ use App\Models\ServiceClass;
 use App\Models\Vehicle;
 use App\Models\VehicleService;
 use App\Models\VehicleUsage;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -114,5 +115,41 @@ class VehicleController extends Controller {
         $classes = ServiceClass::pluck('name', 'id')->toArray();
 
         return view('vehicles.vehicle_details', compact('vehicle', 'usages', 'services', 'classes'));
+    }
+
+    public function vehicle_service_pdf($id) {
+        $vehicle =  Vehicle::find($id);
+        $services = VehicleService::where('vehicle_id', $id)->get();
+        $classes = ServiceClass::pluck('name', 'id')->toArray();
+
+        $data = [
+            'services' => $services,
+            'classes' => $classes,
+            'vehicle' => $vehicle,
+        ];
+
+        $pdf = SnappyPDF::loadView('vehicles.vehicle_service_pdf', $data)
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 7)
+            ->setOption('margin-top', 5)
+            ->setOption('footer-html', '<i>Stre@mline</i>');
+        return $pdf->inline('Audit Trail' . date(" d-m-y h:ia") . '.pdf');
+    }
+
+    public function vehicle_usage_pdf($id) {
+        $vehicle =  Vehicle::find($id);
+        $usages = VehicleUsage::where('vehicle_id', $id)->get();
+
+        $data = [
+            'usages' => $usages,
+            'vehicle' => $vehicle,
+        ];
+
+        $pdf = SnappyPDF::loadView('vehicles.vehicle_usage_pdf', $data)
+            ->setOrientation('portrait')
+            ->setOption('margin-bottom', 7)
+            ->setOption('margin-top', 5)
+            ->setOption('footer-html', '<i>Stre@mline</i>');
+        return $pdf->inline('Audit Trail' . date(" d-m-y h:ia") . '.pdf');
     }
 }

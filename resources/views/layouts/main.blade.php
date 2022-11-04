@@ -18,7 +18,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('app.css') }}" rel="stylesheet">
 
     <style>
         /* devanagari */
@@ -338,6 +338,8 @@
             font-size: 17px;
             margin-bottom: 10px;
         }
+
+        @stack('styles')
     </style>
 </head>
 <body>

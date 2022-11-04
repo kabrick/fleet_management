@@ -64,7 +64,7 @@
                         <th>Repairs</th>
                         <th>Miscellaneous</th>
                         <th>Driver</th>
-                        <th></th>
+                        <th>Registered</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,7 +121,7 @@
                                 @endif
                             </td>
                             <td>{{ $usage->driver }}</td>
-                            <td></td>
+                            <td>{{ $usage->created_at }} by {{ get_name($usage->created_by, 'id', 'name', 'users') }}</td>
                         </tr>
                     @endforeach
 
@@ -145,6 +145,10 @@
 
         <a class="btn btn-primary" href="/register_usage/{{ $vehicle->id }}">Register Usage</a>
 
+        <a class="btn btn-success" target="_blank" href="/vehicle_usage_pdf/{{ $vehicle->id }}">Export PDF</a>
+
+        <a class="btn btn-success" target="_blank" href="/register_service/{{ $vehicle->id }}">Export CSV</a>
+
         <br><hr><br>
 
         <h4 class="text-center">Vehicle Service</h4>
@@ -159,7 +163,7 @@
                     <th>Items</th>
                     <th>Costs</th>
                     <th>Total Cost</th>
-                    <th></th>
+                    <th>Registered</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -186,11 +190,9 @@
                             </ul>
                         </td>
                         <td>{{ $total_costs }}</td>
-                        <td></td>
+                        <td>{{ $service->created_at }} by {{ get_name($service->created_by, 'id', 'name', 'users') }}</td>
                     </tr>
                 @endforeach
-
-                <tr><td colspan="10"></td></tr>
 
                 <tr>
                     <td><b>Totals</b></td>
@@ -204,5 +206,9 @@
         </div>
 
         <a class="btn btn-primary" href="/register_service/{{ $vehicle->id }}">Register Service</a>
+
+        <a class="btn btn-success" target="_blank" href="/vehicle_service_pdf/{{ $vehicle->id }}">Export PDF</a>
+
+        <a class="btn btn-success" target="_blank" href="/register_service/{{ $vehicle->id }}">Export CSV</a>
     </div>
 @endsection
