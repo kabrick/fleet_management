@@ -11,3 +11,13 @@ function get_name($id, $id_column, $column, $table): string{
         return $result->$column;
     }
 }
+
+function monetary($value): string {
+    try {
+        $value = number_format($value);
+    } catch (Error|Exception $e) {
+        $value = 0;
+    }
+
+    return $value . " Ugx";
+}

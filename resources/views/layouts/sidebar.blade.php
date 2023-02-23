@@ -17,11 +17,11 @@
         <hr>
 
         <li>
-            <a href="{{ route('register_vehicle') }}">View Vehicle Usage</a>
+            <a href="{{ route('vehicle_usages_report') }}">View Vehicle Usages</a>
         </li>
 
         <li>
-            <a href="{{ route('register_vehicle') }}">View Vehicle Services</a>
+            <a href="{{ route('vehicle_services_report') }}">View Vehicle Services</a>
         </li>
 
         <hr>

@@ -42,3 +42,6 @@ Route::any('/service_classes/store', [App\Http\Controllers\ServiceClassesControl
 Route::any('/service_classes/edit/{id}', [App\Http\Controllers\ServiceClassesController::class, 'edit'])->name('service_classes.edit');
 Route::any('/service_classes/update', [App\Http\Controllers\ServiceClassesController::class, 'update'])->name('service_classes.update');
 Route::any('/service_classes/delete/{id}', [App\Http\Controllers\ServiceClassesController::class, 'delete'])->name('service_classes.delete');
+
+Route::any('/vehicle_usages_report', [App\Http\Controllers\VehicleReportsController::class, 'vehicle_usages_report'])->name('vehicle_usages_report');
+Route::any('/vehicle_services_report', [App\Http\Controllers\VehicleReportsController::class, 'vehicle_services_report'])->name('vehicle_services_report');
